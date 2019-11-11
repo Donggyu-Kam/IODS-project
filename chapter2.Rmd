@@ -1,7 +1,58 @@
-# Insert chapter 2 title here
+# Excercise 2
 
-*Describe the work you have done this week and summarize your learning.*
+*The data is the student's attitude toward statistics. The data consists of information about students' ages, students' gender, three approaches, students' attitude toward statistics and exam points.And thus, the data has 166 observations and 7 variables. You can figure out three variables to affect the exam points through linear regression models and finally you will figure out the most significant variable to exampoints*
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods.
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using.
+#*Before handling data, you should install two packages:"ggplot2" and"GGally".*
+
+### 1.To read and explore data
+ - Read data and look into the structure and dimension of data
+    + *df<-read.table("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/learning2014.txt", sep=",", header=TRUE )*
+    + *str(df)*
+    + *dim(df)*
+- Initialize plot with data and aesthetic mapping
+    + *p1 <- ggplot(df, aes(x = attitude,col=gender, y = points))*
+- Define the visualization type (points)
+    + *p2 <- p1 + geom_point()*
+- Draw the plot
+    + *p2*
+- Add a regression line
+    + *p3 <- p2 + geom_smooth(method = "lm")*
+- Add a main title and draw the plot
+    + *p4 <- p3+ggtitle("<Student's attitude versus exam points>")* & 
+    + *p4*
+
+### 2. To choose variables and create a regression model 
+By drawing plots illustrating the relationships between the variables and the normality of the erros distributions, it will find out what variables are closely related to exam points. 
+
+- Draw a scatter plot matrix of the variables in learning2014
+    + *p <- ggpairs(df, mapping = aes(col=gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))*
+- Plotting
+    + *p*
+
+According to the plot "p", three variables "attitude", "stra" and "surf" were chosen due to the strongest correlation value as explanatory variables.
+
+- Fit a linear model to each variable
+    + *qplot(attitude, points, data = df) + geom_smooth(method = "lm")*
+    + *qplot(stra, points, data=df)+ geom_smooth(method ="lm")*
+    + *qplot(surf, points, data=df)+ geom_smooth(method="lm")*
+
+*After fitting each variable to a linear regression modle, "attitude" shows postive relationship but the others show week or negative relationships. So, the linear regression model is re-fitted with three variables together.* 
+
+- Fit a linear modewl with three variables together
+    + *mymodel<-lm(points~attitude+stra+surf, data=df)* 
+- Take a look at the summary of the model
+    + *summary(mymodel)*
+
+*In this model, "Stra" and "Surf" are not not significantly related to the exam points. So, the model is re-fitted again witout the two variables*
+
+- Fit the model again with the "attitude"
+
+    + *mymodel2<- lm(points ~ attitude, data=df)*
+    + *summary(mymodel2)*
+    + *par(mfrow = c(2,2))*
+    + *plot(mymodel2, which=c(1,2,5))* - only take looks at the relation between residuals and fitted values, the normal QQplot, and the leverage of observations. 
+    
+
+### 3. Result of regression model analysis
+*By analyzing the residuals and errors of the model, we can test the model validation. The variance of errors in residulas over fitted values looks constant without any patterns but there are 4 outliers indicating that the model only with "attitude" cannot explain the 4 ouliters of exam points. In the normality of errors in QQ plot, the errors are normaly distributed. In leverage of observations, standardized residuals are scattered around 0 and there seems no impact of outliers *
+
