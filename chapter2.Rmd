@@ -1,6 +1,6 @@
 # Regression and Model validation (Excercise 2)
 
-*The data is the student's attitude toward statistics. The data consists of information about students' ages, students' gender, three approaches, students' attitude toward statistics and exam points.And thus, the data has 166 observations and 7 variables. You can figure out three variables to affect the exam points through linear regression models and finally you will figure out the most significant variable to exampoints*
+*The data is the student's attitude toward statistics.The data consists of information about students' ages, students' gender, three approaches, students' attitude toward statistics and exam points. The oberservations whare the exam points are zeor were removed from data. And thus, the data has 166 observations and 7 variables. You can figure out three variables to affect the exam points through linear regression models and finally you will figure out the most significant variable to exampoints*
 
 #*Before handling data, you should install two packages:"ggplot2" and"GGally".*
 
