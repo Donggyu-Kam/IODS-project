@@ -388,7 +388,7 @@ summary {
 <div id="TOC">
 <ul>
 <li><a href="#about-the-project">About the project</a></li>
-<li><a href="#insert-chapter-2-title-here">Insert chapter 2 title here</a></li>
+<li><a href="#regression-and-model-validation-excercise-2">Regression and Model validation (Excercise 2)</a></li>
 </ul>
 </div>
 
@@ -400,15 +400,91 @@ summary {
 <p><a href="https://github.com/Donggyu-Kam/IODS-project" class="uri">https://github.com/Donggyu-Kam/IODS-project</a></p>
 <hr />
 </div>
-<div id="insert-chapter-2-title-here" class="section level1">
-<h1>Insert chapter 2 title here</h1>
-<p><em>Describe the work you have done this week and summarize your learning.</em></p>
+<div id="regression-and-model-validation-excercise-2" class="section level1">
+<h1>Regression and Model validation (Excercise 2)</h1>
+<p><em>The data is the student’s attitude toward statistics. The data consists of information about students’ ages, students’ gender, three approaches, students’ attitude toward statistics and exam points.And thus, the data has 166 observations and 7 variables. You can figure out three variables to affect the exam points through linear regression models and finally you will figure out the most significant variable to exampoints</em></p>
+<p>#<em>Before handling data, you should install two packages:“ggplot2” and“GGally”.</em></p>
+<div id="to-read-and-explore-data" class="section level3">
+<h3>1.To read and explore data</h3>
 <ul>
-<li>Describe your work and results clearly.</li>
-<li>Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods.</li>
-<li>Assume the reader has no previous knowledge of your data or the more advanced methods you are using.</li>
+<li>Read data and look into the structure and dimension of data
+<ul>
+<li><em>df&lt;-read.table(“<a href="http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/learning2014.txt" class="uri">http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/learning2014.txt</a>”, sep=“,”, header=TRUE )</em></li>
+<li><em>str(df)</em></li>
+<li><em>dim(df)</em></li>
+</ul></li>
+<li>Initialize plot with data and aesthetic mapping
+<ul>
+<li><em>p1 &lt;- ggplot(df, aes(x = attitude,col=gender, y = points))</em></li>
+</ul></li>
+<li>Define the visualization type (points)
+<ul>
+<li><em>p2 &lt;- p1 + geom_point()</em></li>
+</ul></li>
+<li>Draw the plot
+<ul>
+<li><em>p2</em></li>
+</ul></li>
+<li>Add a regression line
+<ul>
+<li><em>p3 &lt;- p2 + geom_smooth(method = “lm”)</em></li>
+</ul></li>
+<li>Add a main title and draw the plot
+<ul>
+<li><em>p4 &lt;- p3+ggtitle(“&lt;Student’s attitude versus exam points&gt;”)</em> &amp;</li>
+<li><em>p4</em></li>
+</ul></li>
 </ul>
+</div>
+<div id="to-choose-variables-and-create-a-regression-model" class="section level3">
+<h3>2. To choose variables and create a regression model</h3>
+<p>By drawing plots illustrating the relationships between the variables and the normality of the erros distributions, it will find out what variables are closely related to exam points.</p>
+<ul>
+<li>Draw a scatter plot matrix of the variables in learning2014
+<ul>
+<li><em>p &lt;- ggpairs(df, mapping = aes(col=gender, alpha = 0.3), lower = list(combo = wrap(“facethist”, bins = 20)))</em></li>
+</ul></li>
+<li>Plotting
+<ul>
+<li><em>p</em></li>
+</ul></li>
+</ul>
+<p>According to the plot “p”, three variables “attitude”, “stra” and “surf” were chosen due to the strongest correlation value as explanatory variables.</p>
+<ul>
+<li>Fit a linear model to each variable
+<ul>
+<li><em>qplot(attitude, points, data = df) + geom_smooth(method = “lm”)</em></li>
+<li><em>qplot(stra, points, data=df)+ geom_smooth(method =“lm”)</em></li>
+<li><em>qplot(surf, points, data=df)+ geom_smooth(method=“lm”)</em></li>
+</ul></li>
+</ul>
+<p><em>After fitting each variable to a linear regression modle, “attitude” shows postive relationship but the others show week or negative relationships. So, the linear regression model is re-fitted with three variables together.</em></p>
+<ul>
+<li>Fit a linear modewl with three variables together
+<ul>
+<li><em>mymodel&lt;-lm(points~attitude+stra+surf, data=df)</em></li>
+</ul></li>
+<li>Take a look at the summary of the model
+<ul>
+<li><em>summary(mymodel)</em></li>
+</ul></li>
+</ul>
+<p><em>In this model, “Stra” and “Surf” are not not significantly related to the exam points. So, the model is re-fitted again witout the two variables</em></p>
+<ul>
+<li><p>Fit the model again with the “attitude”</p>
+<ul>
+<li><em>mymodel2&lt;- lm(points ~ attitude, data=df)</em></li>
+<li><em>summary(mymodel2)</em></li>
+<li><em>par(mfrow = c(2,2))</em></li>
+<li><em>plot(mymodel2, which=c(1,2,5))</em> - only take looks at the relation between residuals and fitted values, the normal QQplot, and the leverage of observations.</li>
+</ul></li>
+</ul>
+</div>
+<div id="result-of-regression-model-analysis" class="section level3">
+<h3>3. Result of regression model analysis</h3>
+<p><em>By analyzing the residuals and errors of the model, we can test the model validation. The variance of errors in residulas over fitted values looks constant without any patterns but there are 4 outliers indicating that the model only with “attitude” cannot explain the 4 ouliters of exam points. In the normality of errors in QQ plot, the errors are normaly distributed. In leverage of observations, standardized residuals are scattered around 0 and there seems no impact of outliers </em></p>
 <hr />
+</div>
 </div>
 
 
