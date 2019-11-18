@@ -1,8 +1,4 @@
----
-title: "chapter3"
-output: html_document
----
-
+# Losistic Regression (Exercise 3)
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
