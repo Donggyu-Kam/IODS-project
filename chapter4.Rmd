@@ -1,4 +1,5 @@
 # Clustering and classification (Exercise 4)
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -22,7 +23,8 @@ cor_matrix<-cor(Boston)
 cor_matrix%>%round(2)
 corrplot(cor_matrix, method="circle", type="upper", cl.pos="b", tl.pos="d", tl.cex=0.6)
 ```
-###Standardized data
+
+### Standardized data
 ```{r}
 boston_scaled<-scale(Boston)
 summary(boston_scaled)
