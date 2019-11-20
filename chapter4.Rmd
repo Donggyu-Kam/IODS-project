@@ -1,10 +1,5 @@
 # Clustering and classification (Exercise 4)
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
 ```{r}
 library(MASS);library(tidyverse);library(corrplot)
 data("Boston")
