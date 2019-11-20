@@ -1,13 +1,10 @@
 # Grouping and Clustering
 
-
-library(mass)
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-library(MASS)
 
-data("BOSTON")
+
 ```{r}
 library(MASS);library(tidyverse);library(corrplot)
 data("Boston")
