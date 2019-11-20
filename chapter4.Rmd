@@ -1,0 +1,57 @@
+---
+title: "chapter4"
+output: html_document
+---
+library(mass)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+library(MASS)
+
+data("BOSTON")
+```{r}
+library(MASS);library(tidyverse);library(corrplot)
+data("Boston")
+
+```
+
+```{r}
+str(Boston)
+summary(Boston)
+pairs(Boston)
+```
+
+
+```{r}
+cor_matrix<-cor(Boston)
+cor_matrix%>%round(2)
+corrplot(cor_matrix, method="circle", type="upper", cl.pos="b", tl.pos="d", tl.cex=0.6)
+```
+###Standardized data
+```{r}
+boston_scaled<-scale(Boston)
+summary(boston_scaled)
+
+```
+### Covert matrix data to dafaframe
+```{r}
+class(boston_scaled)
+boston_scaled<-as.data.frame(boston_scaled)
+
+```
+
+### Create a catergorical variable with the variable "Crime" 
+```{r}
+summary("crim")
+bins<-quantile(boston_scaled$crim)
+bins
+crime<-cut(boston_scaled$crim, breaks=bins, include.lowest=TRUE, label=c("low","med_low","med_high", "high"))
+crime
+table(crime)
+boston_scaled<-dplyr::select(boston_scaled,-crim)
+boston_scaled
+boston_scaled<-data.frame(boston_scaled, crime)
+
+```
+
+
