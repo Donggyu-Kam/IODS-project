@@ -62,7 +62,7 @@ test<-boston_scaled[-ind, ]
 correct_classes<-test$crime
 ```
 
-## LInear Discriminant Analysis
+## Linear Discriminant Analysis
 ```{r}
 lda.fit<-lda(crime~., data=train)
 lda.fit
