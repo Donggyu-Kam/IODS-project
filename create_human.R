@@ -45,3 +45,4 @@ glimpse(human)
 
 write.table(human)
 write.csv(human, 'Z:\\IODS-project\\data\\human.csv')
+
