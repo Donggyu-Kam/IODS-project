@@ -44,9 +44,9 @@ human_ <- human_[1:last, ]
 
 
 
-
+library(dplyr)
 # remove the Country variable
-human_ <- select(human_, -Country)
+human_<- select(human_, -Country)
 
 
 # Access GGally
@@ -54,6 +54,7 @@ library(GGally)
 
 # visualize the 'human_' variables
 ggpairs(human_)
+human_
 
 # compute the correlation matrix and visualize it with corrplot
 cor(human_) %>% corrplot
