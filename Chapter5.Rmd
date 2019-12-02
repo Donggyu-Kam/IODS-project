@@ -90,7 +90,7 @@ my_tea1 <- dplyr::select(my_tea, one_of(keep_columns))
 gather(my_tea1) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
 ```
 
-## Multiple Correspondence Analysis
+## 3. Multiple Correspondence Analysis
 
 ```{r}
 mca <- MCA(my_tea1, graph = FALSE)
