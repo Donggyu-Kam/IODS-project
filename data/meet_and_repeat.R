@@ -1,34 +1,34 @@
 #Donggyu Kam, 08.12.2019
 
 #Read table
-bprs<-read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/master/Examples/data/BPRS.txt", sep="", header=T)
-str(bprs)
-summary(bprs)
-head(bprs,3)
+BPRS<-read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/master/Examples/data/BPRS.txt", sep="", header=T)
+str(BPRS)
+summary(BPRS)
 
-rats<-read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/master/Examples/data/rats.txt", sep="\t",header=TRUE)
-str(rats)
-summary(rats)
+RATS<-read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/master/Examples/data/rats.txt", sep="\t",header=TRUE)
+str(RATS)
+summary(RATS)
 
 #Conversion the categorial variables to factors
-bprs$treatment<-as.factor(bprs$treatment)
-bprs$subject<-as.factor(bprs$subject)
-str(bprs)
-head(bprs)
+BPRS$treatment<-factor(BPRS$treatment)
+BPRS$subject<-factor(BPRS$subject)
+str(BPRS)
+head(BPRS)
 
-rats$ID<-as.factor(rats$ID)
-rats$Group<-as.factor(rats$Group)
-str(rats)
+
+RATS$ID<-factor(RATS$ID)
+RATS$Group<-factor(RATS$Group)
+str(RATS)
 
 #Convert the datasets to long form
 library(dplyr)
 library(tidyr)
-bprs<-bprs%>%gather(key=week, value=bprs_score, -treatment, -subject)
-bprs
-str(bprs)
-rats<-rats%>%gather(key=time, value=gram, -Group, -ID)
-rats
-str(rats)
+BPRSL<-BPRS%>%gather(key=weeks, value=bprs, -treatment, -subject)
+BPRSL<-BPRSL%>%mutate(week=as.integer(substr(weeks,5,5)))
+glimpse(BPRSL)
+RATSL<-RATS%>%gather(key=WDs, value=rats, -Group, -ID)
+RATSL<-RATSL%>%mutate(time=as.integer(substr(WDs, 3, 4)))
+glimpse(RATSL)
 
 
 setwd("Z:\\IODS-project\\data")
