@@ -33,5 +33,5 @@ glimpse(RATSL)
 
 setwd("Z:\\IODS-project\\data")
 
-write.csv(rats,file="rats.csv",row.names = FALSE)
-write.csv(bprs,file="bprs.csv",row.names = FALSE)
+write.csv(RATSL,file="RATSL.csv",row.names = FALSE)
+write.csv(BPRSL,file="BPRSL.csv",row.names = FALSE)
