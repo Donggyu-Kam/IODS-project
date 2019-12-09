@@ -104,8 +104,5 @@ summary(BPRS_ref2)
 anova(BPRS_ref1, BPRS_ref2)
 ```
 
-```{r}
-Fitted<-fitted(BPRS_ref2)
-BPRSL%>% mutate(Fitted)
-```
+
 
